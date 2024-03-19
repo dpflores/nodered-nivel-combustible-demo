@@ -1,0 +1,12 @@
+{
+    "name": "nivel-combustible-demo",
+    "description": "Medición del nivle de combustible con sensor maximatecc y envio a la plataforma ACME",
+    "version": "0.0.1",
+    "dependencies": {},
+    "node-red": {
+        "settings": {
+            "flowFile": "flows.json",
+            "credentialsFile": "flows_cred.json"
+        }
+    }
+}
