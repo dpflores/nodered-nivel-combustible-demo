@@ -103,6 +103,37 @@
         "interface": "can1"
     },
     {
+        "id": "f0d2577e471f6b7c",
+        "type": "mqtt-broker",
+        "name": "ACME broker demo",
+        "broker": "161.132.39.167",
+        "port": "7883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
         "id": "27bb12220d584b8b",
         "type": "inject",
         "z": "788510f294255c8b",
@@ -251,22 +282,22 @@
                 "t": "set",
                 "p": "live_gps.gateway_key",
                 "pt": "global",
-                "to": "payload",
-                "tot": "msg"
+                "to": "A13CFG",
+                "tot": "str"
             },
             {
                 "t": "set",
                 "p": "live_sensors.gateway_key",
                 "pt": "global",
-                "to": "payload",
-                "tot": "msg"
+                "to": "A13CFG",
+                "tot": "str"
             },
             {
                 "t": "set",
                 "p": "live_info.gateway_key",
                 "pt": "global",
-                "to": "payload",
-                "tot": "msg"
+                "to": "A13CFG",
+                "tot": "str"
             }
         ],
         "action": "",
@@ -304,7 +335,7 @@
                 "t": "set",
                 "p": "live_sensors",
                 "pt": "global",
-                "to": "{\"gateway_key\":\"\",\"timestamp\":0,\"data\":{\"sensor_combustible\":{\"altura\":0,\"combustible\":0}}}",
+                "to": "{\"gateway_key\":\"\",\"timestamp\":0,\"data\":{\"demo_level\":{\"level\":0,\"combustible\":0,\"chartExtra\":{\"max\":250}},\"demo_angle\":{\"angle_x\":0,\"angle_y\":0}}}",
                 "tot": "json"
             }
         ],
@@ -363,7 +394,7 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "8d53d2f17df7fbc4",
+        "broker": "f0d2577e471f6b7c",
         "x": 630,
         "y": 160,
         "wires": []
@@ -403,7 +434,7 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "8d53d2f17df7fbc4",
+        "broker": "f0d2577e471f6b7c",
         "x": 650,
         "y": 340,
         "wires": []
@@ -524,7 +555,7 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "8d53d2f17df7fbc4",
+        "broker": "f0d2577e471f6b7c",
         "x": 640,
         "y": 100,
         "wires": []
@@ -543,7 +574,7 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "8d53d2f17df7fbc4",
+        "broker": "f0d2577e471f6b7c",
         "x": 620,
         "y": 220,
         "wires": []
@@ -562,7 +593,7 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "8d53d2f17df7fbc4",
+        "broker": "f0d2577e471f6b7c",
         "x": 640,
         "y": 400,
         "wires": []
@@ -816,6 +847,73 @@
         "type": "debug",
         "z": "590aed86c3482a18",
         "name": "debug 14",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 980,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "6e3259ca3dcf5ff1",
+        "type": "exec",
+        "z": "590aed86c3482a18",
+        "command": "/home/debian/owasys4x_binaries/IMU_OWASYS 1",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 510,
+        "y": 300,
+        "wires": [
+            [
+                "1659e00addcd1420"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "c0eaed7f2ae578db",
+        "type": "inject",
+        "z": "590aed86c3482a18",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "2",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 300,
+        "wires": [
+            [
+                "6e3259ca3dcf5ff1"
+            ]
+        ]
+    },
+    {
+        "id": "a8774da16d8342e0",
+        "type": "debug",
+        "z": "590aed86c3482a18",
+        "name": "debug 15",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -823,9 +921,88 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1080,
-        "y": 220,
+        "x": 1160,
+        "y": 380,
         "wires": []
+    },
+    {
+        "id": "1659e00addcd1420",
+        "type": "json",
+        "z": "590aed86c3482a18",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 790,
+        "y": 300,
+        "wires": [
+            [
+                "2717980bacf7f66b"
+            ]
+        ]
+    },
+    {
+        "id": "f3a3a56a3fa5cb4d",
+        "type": "comment",
+        "z": "590aed86c3482a18",
+        "name": "0: aceleración g filtrada   1: aceleración raw",
+        "info": "",
+        "x": 500,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "2717980bacf7f66b",
+        "type": "function",
+        "z": "590aed86c3482a18",
+        "name": "function 108",
+        "func": "// Valores proporcionados\nconst { x_axis, y_axis, z_axis } = msg.payload;\n\n// Aceleración debido a la gravedad en m/s^2\nconst g = 9.81; // Suponiendo que estamos utilizando la aceleración estándar de la gravedad\n\n// Multiplicar los valores por g\nconst x_acc = x_axis * g;\nconst y_acc = y_axis * g;\nconst z_acc = z_axis * g;\n\n// Calcular los ángulos en radianes\nconst angle_x = Math.atan2(y_acc, Math.sqrt(Math.pow(x_acc, 2) + Math.pow(z_acc, 2)));\nconst angle_y = Math.atan2(-x_acc, Math.sqrt(Math.pow(y_acc, 2) + Math.pow(z_acc, 2)));\n\n// Convertir los ángulos de radianes a grados\nconst angle_x_deg = Math.round(10000*angle_x * (180 / Math.PI))/10000;\nconst angle_y_deg = Math.round(10000*angle_y * (180 / Math.PI))/10000;\n\nconst json_out = {\n    \"x_angle\": angle_x_deg,\n    \"y_angle\": angle_y_deg\n}\nmsg.payload = json_out;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 300,
+        "wires": [
+            [
+                "a8774da16d8342e0",
+                "1e0a97ca2ae23388"
+            ]
+        ]
+    },
+    {
+        "id": "1e0a97ca2ae23388",
+        "type": "change",
+        "z": "590aed86c3482a18",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "live_sensors.data.demo_angle.angle_x",
+                "pt": "global",
+                "to": "payload.x_angle",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "live_sensors.data.demo_angle.angle_y",
+                "pt": "global",
+                "to": "payload.y_angle",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1160,
+        "y": 300,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "e42e5626f1e90489",
@@ -1340,31 +1517,6 @@
         ]
     },
     {
-        "id": "7a1824022fce4144",
-        "type": "change",
-        "z": "f91d6e32ad34d56a",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "live_sensors.data.sensor_combustible.altura",
-                "pt": "global",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 920,
-        "y": 100,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "4f35ca0811abcc1c",
         "type": "debug",
         "z": "f91d6e32ad34d56a",
@@ -1379,5 +1531,84 @@
         "x": 580,
         "y": 60,
         "wires": []
+    },
+    {
+        "id": "7a1824022fce4144",
+        "type": "change",
+        "z": "f91d6e32ad34d56a",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "live_sensors.data.demo_level.level",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 890,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3b4d4c4818dd24e2",
+        "type": "inject",
+        "z": "f91d6e32ad34d56a",
+        "name": "Test combustible",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "250",
+        "payloadType": "num",
+        "x": 560,
+        "y": 180,
+        "wires": [
+            [
+                "fee3a7859a88c816"
+            ]
+        ]
+    },
+    {
+        "id": "fee3a7859a88c816",
+        "type": "change",
+        "z": "f91d6e32ad34d56a",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "live_sensors.data.demo_level.level",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 890,
+        "y": 180,
+        "wires": [
+            []
+        ]
     }
 ]
